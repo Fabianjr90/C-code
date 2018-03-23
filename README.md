@@ -4,4 +4,4 @@
 
 **node_forces.cpp** applies repulsive forces between nodes to unravel a graph
 
-**WikiLadder.cpp** finds the shortest distance between two Wikipedia sites. Example: shortest distance between the "Milk" and "Gene" Wikipedia sites is: Milk-->Carbohydrate-->Nucleic Acid-->DNA-->Gene
+**WikiLadder.cpp** finds the shortest distance between two Wikipedia sites. Example: shortest distance between the "Milkshake" and "Gene" Wikipedia sites is: Milkshake-->Carbohydrate-->DNA-->Gene
