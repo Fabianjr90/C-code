@@ -18,15 +18,9 @@ int getInteger();
 string GetLine();
 std::vector<Node> nodeCreator(const int numNodes);
 std::vector<Edge> edgeCreator(std::ifstream& myStream);
-void calculateRepulsiveForces(const SimpleGraph& myGraph,
-                              std::vector<double>& nodePosX,
-                              std::vector<double>& nodePosY);
-void calculateAttractiveForces(const SimpleGraph& myGraph,
-                               std::vector<double>& nodePosX,
-                               std::vector<double>& nodePosY);
-void moveNodes(SimpleGraph& myGraph,
-               std::vector<double>& nodePosX,
-               std::vector<double>& nodePosY);
+void calculateRepulsiveForces(const SimpleGraph& myGraph,std::vector<double>& nodePosX,std::vector<double>& nodePosY);
+void calculateAttractiveForces(const SimpleGraph& myGraph,std::vector<double>& nodePosX,std::vector<double>& nodePosY);
+void moveNodes(SimpleGraph& myGraph,std::vector<double>& nodePosX,std::vector<double>& nodePosY);
 
 //main method
 int main() {
@@ -92,9 +86,7 @@ int main() {
 }
 
 
-/* Prints a message to the console welcoming the user and
- * describing the program.
- */
+//Prints a message to the console welcoming the user and describing the program.
 void Welcome() {
     cout << "Welcome to CS106L GraphViz!" << endl;
     cout << "This program uses a force-directed graph layout algorithm" << endl;
@@ -103,10 +95,8 @@ void Welcome() {
 }
 
 
-/* This function prompts the user for a file name,
- * then opens the file and makes sure it's valid.
- * Will reprompt if the file does not exist
- * (similar to code found in course reader)
+/* This function prompts the user for a file name, then opens the file and makes sure it's valid.
+ * Will reprompt if the file does not exist (similar to code found in course reader)
  */
 std::ifstream streamCreator() {
     std::ifstream myStream;
@@ -122,10 +112,7 @@ std::ifstream streamCreator() {
 }
 
 
-/* Converts user input to an integer
- * Will reprompt if the input is not valid
- * (from course reader)
- */
+//Converts user input to an integer. Will reprompt if the input is not valid (from course reader)
 int getInteger() {
     while(true) {
         std::stringstream converter;
@@ -145,8 +132,7 @@ int getInteger() {
     }
 }
 
-/* Takes an input from the user (from class)
- */
+//Takes an input from the user (from class)
 string GetLine() {
     string result;
     std::getline(cin,result);
@@ -154,8 +140,7 @@ string GetLine() {
 }
 
 
-/* Uses the number of nodes given to create Node,
- * places nodes along the unit circle, and
+/* Uses the number of nodes given to create Node, places nodes along the unit circle, and
  * pushes Node structs into a vector<Node>
  */
 std::vector<Node> nodeCreator(const int numNodes) {
@@ -171,9 +156,7 @@ std::vector<Node> nodeCreator(const int numNodes) {
 }
 
 
-/* Reads the input stream to create Edge structs
- * Pushes Edge structs into a vector<Edge>
- */
+//Reads the input stream to create Edge structs. Pushes Edge structs into a vector<Edge>
 std::vector<Edge> edgeCreator(std::ifstream& myStream) {
     std::vector<Edge> myEdgeVector;
     int leftEdge;
@@ -188,12 +171,8 @@ std::vector<Edge> edgeCreator(std::ifstream& myStream) {
 }
 
 
-/* Calculates repulsive forces between nodes
- * Keeps track of delX and delY for each node
- */
-void calculateRepulsiveForces(const SimpleGraph& myGraph,
-                              std::vector<double>& nodePosX,
-                              std::vector<double>& nodePosY) {
+//Calculates repulsive forces between nodes. Keeps track of delX and delY for each node
+void calculateRepulsiveForces(const SimpleGraph& myGraph,std::vector<double>& nodePosX,std::vector<double>& nodePosY) {
     double k_repel = 0.001;
     auto myNodes = myGraph.nodes;
     for (size_t i = 0; i<myNodes.size(); ++i) {
@@ -215,13 +194,8 @@ void calculateRepulsiveForces(const SimpleGraph& myGraph,
 }
 
 
-/* Calculates attractive forces between nodes
- * connected by edges. Keeps track of delX and
- * delY for each node
- */
-void calculateAttractiveForces(const SimpleGraph& myGraph,
-                               std::vector<double>& nodePosX,
-                               std::vector<double>& nodePosY) {
+//Calculates attractive forces between nodes connected by edges. Keeps track of delX and delY for each node
+void calculateAttractiveForces(const SimpleGraph& myGraph,std::vector<double>& nodePosX,std::vector<double>& nodePosY) {
     double k_attract = 0.001;
     auto myNodes = myGraph.nodes;
     auto myEdges = myGraph.edges;
@@ -229,10 +203,7 @@ void calculateAttractiveForces(const SimpleGraph& myGraph,
         Node startNode = myNodes[myEdges[i].start];
         Node endNode = myNodes[myEdges[i].end];
 
-        double Fattract = k_attract *
-                (pow(endNode.y-startNode.y,2) +
-                 pow(endNode.x-startNode.x,2));
-
+        double Fattract = k_attract*(pow(endNode.y-startNode.y,2)+pow(endNode.x-startNode.x,2));
         double theta = atan2(endNode.y-startNode.y,endNode.x-startNode.x);
 
         nodePosX[myEdges[i].start] += Fattract * cos(theta);
@@ -243,12 +214,8 @@ void calculateAttractiveForces(const SimpleGraph& myGraph,
 }
 
 
-/* Updates the positions of all nodes according
- * to the net forces (repulsive and attractive)
- */
-void moveNodes(SimpleGraph& myGraph,
-               std::vector<double>& nodePosX,
-               std::vector<double>& nodePosY) {
+//Updates the positions of all nodes according to the net forces (repulsive and attractive)
+void moveNodes(SimpleGraph& myGraph,std::vector<double>& nodePosX,std::vector<double>& nodePosY) {
 
     for (size_t i = 0; i < nodePosX.size(); ++i) {
         myGraph.nodes[i].x += nodePosX[i];
