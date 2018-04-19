@@ -1,5 +1,4 @@
-/* Name: Fabian E. Ortega
- * This code uses four distinct ways of calculating the shortest path between a start 
+/* This code uses four distinct ways of calculating the shortest path between a start 
  * node and end node. Definitions for "shortest" paths vary between algorithms.
  * Functions descriptions are found below.
  */
